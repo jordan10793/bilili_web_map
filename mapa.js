@@ -18,6 +18,44 @@ var minimap = new L.Control.MiniMap(carto_light,
 
     }).addTo(map);
 
+// Sidebar dinamico ------------------------------------------------------------------------------------------------------- 
+// Source https://github.com/Turbo87/leaflet-sidebar
+
+var sidebar = L.control.sidebar('sidebar', {
+    closeButton: true,
+    position: 'left'
+    });
+map.addControl(sidebar);
+
+		// setTimeout(function () {
+            // sidebar.show();
+        // }, 500);
+
+        // map.on('click', function () {
+            // sidebar.hide();
+        // })
+
+        // sidebar.on('show', function () {
+            // console.log('Sidebar will be visible.');
+        // });
+
+        // sidebar.on('shown', function () {
+            // console.log('Sidebar is visible.');
+        // });
+
+        // sidebar.on('hide', function () {
+            // console.log('Sidebar will be hidden.');
+        // });
+
+        // sidebar.on('hidden', function () {
+            // console.log('Sidebar is hidden.');
+        // });
+
+        L.DomEvent.on(sidebar.getCloseButton(), 'click', function () {
+            console.log('Close button clicked.');
+        });
+		
+
 // Area de conservacion
 
 // Crear funciones de interacción con el mouse (tema - intema - zoom)
@@ -140,6 +178,11 @@ function select_prov (layer) {
 	}
 }
 
+function openSidebar(selection) {
+    sidebar.show();
+    sidebar.setContent(selection.feature.properties.provincia + "<br>" + selection.feature.properties.ori_toponi);
+}
+
 // Función de features parta ingresar en onEachFeature dentro de L.geojson
 function on_feature_prov (feature, layer) {
 	layer.on({
@@ -150,7 +193,8 @@ function on_feature_prov (feature, layer) {
 		dehighlight_prov(e.target);
 		},
 		'click': function (e) {
-		select_prov(e.target);
+		select_prov(e.target),
+		openSidebar(e.target);
 		}
 	});
 }
@@ -181,9 +225,7 @@ function style_prov(feature){
     };
 }
 
-var prov= L.geoJson(prov,{style: style_prov, onEachFeature: on_feature_prov}).bindPopup(function(layers){
-    return layers.feature.properties.provincia}, {"className" : "prov"}
-).addTo(map);
+var prov= L.geoJson(prov,{style: style_prov, onEachFeature: on_feature_prov}).addTo(map);
 
 // ------------------------------------------------------------------------------------------------------------------
 
@@ -196,10 +238,10 @@ var baseLayers = {
  
  var overlays = {
 	"Conservación": {
-		 "Áreas de Conservación": area_conservacion,
+		"Áreas de Conservación": area_conservacion,
 	},
 	"Div Administrativa": {
-	"Provincias": prov
+		"Provincias": prov
 	}
  };
     

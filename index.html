@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="Control.MiniMap.css">
 	<link rel="stylesheet" href="dist/leaflet.groupedlayercontrol.min.css"/>
     <link rel="stylesheet" type="text/css" href="leaflet.awesome-markers.css">
+	<link rel="stylesheet" href="side/L.Control.Sidebar.css" />
 </head>
 
 <body>
@@ -31,7 +32,7 @@
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
         integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
         crossorigin=""></script>
-    <script src="Control.MiniMap.min.js"></script> 
+
     <script type="text/javascript" src="layers/co1.js" ></script> 
     <script type="text/javascript" src="layers/area_conservacion.js"></script>
     <script type="text/javascript" src="layers/selv.js"></script>
@@ -43,11 +44,18 @@
     <script type="text/javascript" src="leaflet.awesome-markers.js"></script>
 	<script type="text/javascript" src="layers/prov.js"></script>
 
-    <script src="dist/leaflet.groupedlayercontrol.min.js"></script>
-	<script src="mapa.js"></script>
+	
 	<script src='https://unpkg.com/leaflet@1.0.3/dist/leaflet.js'></script>
     <script src='https://unpkg.com/jquery@3.2.1/dist/jquery.min.js'></script>
     
+	<div id="sidebar">
+    </div>
+
+	<script src="Control.MiniMap.min.js"></script>
+	<script src="dist/leaflet.groupedlayercontrol.min.js"></script>
+	<script src="side/L.Control.Sidebar.js"></script>
+	<script src="mapa.js"></script>
+
 </body>
 
 <script>
